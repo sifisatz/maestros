@@ -18,7 +18,7 @@ import { RolesGuard } from './guards/roles/roles.guard';
 
 @Module({
   imports: [
-    JwtModule.registerAsync(jwtConfig.asProvider()),
+    JwtModule.registerAsync(jwtConfig.asProvider()), //sign function of jwt
     ConfigModule.forFeature(jwtConfig),
     ConfigModule.forFeature(refreshConfig),
     ConfigModule.forFeature(googleOauthConfig),
