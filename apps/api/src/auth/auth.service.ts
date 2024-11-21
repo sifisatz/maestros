@@ -65,6 +65,12 @@ export class AuthService {
 
   async validateJwtUser(userId: number) {
     const user = await this.userService.findOne(userId);
+    /**
+     * scenario: user somehow is logged in but lets say admin
+     *           is deleting that user.With this in place we dont
+     *           want to allow to that user to access the system
+     *           so we throw that error
+     */
     if (!user) throw new UnauthorizedException('User not found!');
     const currentUser = { id: user.id, role: user.role };
     return currentUser;
