@@ -20,8 +20,6 @@ export async function signUp(
   });
 
   if (!validationFields.success) {
-  console.log('response',  validationFields.error.flatten().fieldErrors,);
-
     return {
       error: validationFields.error.flatten().fieldErrors,
     };
@@ -37,7 +35,6 @@ export async function signUp(
       body: JSON.stringify(validationFields.data),
     }
   );
-  console.log('response', response.ok);
   if (response.ok) {
     redirect("/auth/signin");
   } else
@@ -77,7 +74,6 @@ export async function signIn(
 
   if (response.ok) {
     const result = await response.json();
-    // TODO: Create The Session For Authenticated User.
 
     await createSession({
       user: {

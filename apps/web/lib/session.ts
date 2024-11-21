@@ -20,6 +20,7 @@ const secretKey = process.env.SESSION_SECRET_KEY!;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function createSession(payload: Session) {
+  //7 days from now
   const expiredAt = new Date(
     Date.now() + 7 * 24 * 60 * 60 * 1000
   );
@@ -31,11 +32,11 @@ export async function createSession(payload: Session) {
     .sign(encodedKey);
 
   cookies().set("session", session, {
-    httpOnly: true,
-    secure: true,
+    httpOnly: true, //saves cookie on the server
+    secure: true, // ensures cookies is sent only over https connections
     expires: expiredAt,
-    sameSite: "lax",
-    path: "/",
+    sameSite: "lax", // sends cookies to top level navigational pages
+    path: "/", //valid for the entire site
   });
 }
 

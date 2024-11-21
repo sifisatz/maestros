@@ -6,7 +6,6 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
-import { UserService } from './user/user.service';
 
 @Module({
   imports: [
@@ -16,6 +15,6 @@ import { UserService } from './user/user.service';
     // GraphQLModule,
   ],
   controllers: [AppController],
-  providers: [AppService, UserService, PrismaService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
