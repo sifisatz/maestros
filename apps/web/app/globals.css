@@ -59,6 +59,13 @@
   * {
     @apply border-border;
   }
+  @font-face {
+    font-family: 'foggy';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./fonts/Foggy-Regular.woff2) format('woff2');
+  }
   body {
     @apply bg-background text-foreground;
   }
