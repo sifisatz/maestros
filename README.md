@@ -80,11 +80,13 @@ npx turbo link
 
 ## Useful Links
 
-Learn more about the power of Turborepo:
+Learn more :
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+- [Passport](https://docs.nestjs.com/recipes/passport)
+- [JWT-Auth](https://docs.nestjs.com/security/authentication#jwt-token)
+- [Nextjs - Turbopack](https://nextjs.org/docs/architecture/turbopack)
+- [Nextjs - Monorepo](https://docs.nestjs.com/cli/monorepo#monorepo-mode)
+
+### JWT architecture documents can be found here: 
+<img src="docs/auth/image.png" alt="alt text" width="200">
+
