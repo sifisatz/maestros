@@ -13,6 +13,7 @@ import refreshConfig from './config/refresh.config';
 import { ConfigType } from '@nestjs/config';
 import { Role } from '@prisma/client';
 import { LoggerService } from 'src/logger/logger.service';
+import { LoginCredentials } from './auth.types';
 
 @Injectable()
 export class AuthService {
@@ -29,7 +30,10 @@ export class AuthService {
     return this.userService.create(createUserDto);
   }
 
-  async validateLocalUser(email: string, password: string) {
+  async validateLocalUser(
+    email: LoginCredentials['email'],
+    password: LoginCredentials['password'],
+  ) {
     const user = await this.userService.findByEmail(email);
     if (!user) throw new UnauthorizedException('User not found!');
     const isPasswordMatched = verify(user.password, password);

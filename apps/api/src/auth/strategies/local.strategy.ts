@@ -6,6 +6,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
+    // By default, Passport uses 'username' and 'password'.
     super({
       usernameField: 'email',
     });
