@@ -7,7 +7,7 @@ import {
   LoginFormSchema,
   SignupFormSchema,
 } from "./type";
-import { createSession, updateTokens } from "./session";
+import { createSession } from "./session";
 
 export async function signUp(
   state: FormState,
@@ -111,7 +111,7 @@ export const refreshToken = async (
         }),
       }
     );
-    console.log("res::::", response);
+    console.log(`${BACKEND_URL}/auth/refresh`, response);
     if (!response.ok) {
       throw new Error(
         "Failed to refresh token" + response.statusText

@@ -71,15 +71,17 @@ export async function updateTokens({
   accessToken: string;
   refreshToken: string;
 }) {
-  const cookie = cookies().get("session")?.value;
-  if (!cookie) return null;
+  const session = await cookies().get("session")?.value; //undefined;
+  if (!session) {
+    throw new Error("Session session not found");
+  }
 
   const { payload } = await jwtVerify<Session>(
-    cookie,
+    session,
     encodedKey
   );
 
-  if (!payload) throw new Error("Session not found");
+  if (!payload) throw new Error("Session  verify failed");
 
   const newPayload: Session = {
     user: {
@@ -89,5 +91,23 @@ export async function updateTokens({
     refreshToken,
   };
 
-  await createSession(newPayload);
+  const newSession = await new SignJWT(newPayload)
+    .setProtectedHeader({ alg: "HS256" })
+    .setIssuedAt()
+    .setExpirationTime("7d")
+    .sign(encodedKey);
+  const expires = new Date(
+    Date.now() + 7 * 24 * 60 * 60 * 1000
+  );
+  const cookieStore = await cookies();
+  console.log("adding cookie store");
+  cookieStore.set("session1", newSession, {
+    httpOnly: true,
+    secure: true,
+    expires: expires,
+    sameSite: "lax",
+    path: "/",
+  });
+
+  // await createSession(newPayload);
 }

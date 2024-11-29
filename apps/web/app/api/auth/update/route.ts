@@ -7,8 +7,14 @@ export async function POST(req: NextRequest) {
 
   if (!accessToken || !refreshToken)
     return new Response("Provide Tokens", { status: 401 });
+  console.log(
+    "New created tokens:",
+    accessToken,
+    refreshToken
+  );
 
-  await updateTokens({ accessToken, refreshToken });
+  
+  // await updateTokens({ accessToken, refreshToken });
 
   return new Response("OK", { status: 200 });
 }

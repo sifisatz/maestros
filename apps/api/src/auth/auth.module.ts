@@ -15,6 +15,7 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from './guards/roles/roles.guard';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { RolesGuard } from './guards/roles/roles.guard';
   ],
   controllers: [AuthController],
   providers: [
+    LoggerService,
     AuthService,
     UserService,
     PrismaService,
