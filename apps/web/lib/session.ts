@@ -20,7 +20,6 @@ const secretKey = process.env.SESSION_SECRET_KEY!;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function createSession(payload: Session) {
-  //7 days from now
   const expiredAt = new Date(
     Date.now() + 7 * 24 * 60 * 60 * 1000
   );
@@ -32,11 +31,11 @@ export async function createSession(payload: Session) {
     .sign(encodedKey);
 
   cookies().set("session", session, {
-    httpOnly: true, //saves cookie on the server
-    secure: true, // ensures cookies is sent only over https connections
+    httpOnly: true,
+    secure: true,
     expires: expiredAt,
-    sameSite: "lax", // sends cookies to top level navigational pages
-    path: "/", //valid for the entire site
+    sameSite: "lax",
+    path: "/",
   });
 }
 
@@ -71,17 +70,15 @@ export async function updateTokens({
   accessToken: string;
   refreshToken: string;
 }) {
-  const session = await cookies().get("session")?.value; //undefined;
-  if (!session) {
-    throw new Error("Session session not found");
-  }
+  const cookie = cookies().get("session")?.value;
+  if (!cookie) return null;
 
   const { payload } = await jwtVerify<Session>(
-    session,
+    cookie,
     encodedKey
   );
 
-  if (!payload) throw new Error("Session  verify failed");
+  if (!payload) throw new Error("Session not found");
 
   const newPayload: Session = {
     user: {
@@ -91,23 +88,5 @@ export async function updateTokens({
     refreshToken,
   };
 
-  const newSession = await new SignJWT(newPayload)
-    .setProtectedHeader({ alg: "HS256" })
-    .setIssuedAt()
-    .setExpirationTime("7d")
-    .sign(encodedKey);
-  const expires = new Date(
-    Date.now() + 7 * 24 * 60 * 60 * 1000
-  );
-  const cookieStore = await cookies();
-  console.log("adding cookie store");
-  cookieStore.set("session1", newSession, {
-    httpOnly: true,
-    secure: true,
-    expires: expires,
-    sameSite: "lax",
-    path: "/",
-  });
-
-  // await createSession(newPayload);
+  await createSession(newPayload);
 }

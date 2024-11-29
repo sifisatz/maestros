@@ -15,32 +15,30 @@ const AppBar = async () => {
       <div className="flex items-center gap-4 ml-auto">
         {!session || !session.user ? (
           <>
-            <Link href={"/dashboard"} className="text-lg">
+            <Link href={"/dashboard"} className="text-sm">
               Browse events
             </Link>
-            <Link href={"/dashboard"} className="text-lg">
+            <Link href={"/dashboard"} className="text-sm">
               About
             </Link>
-            <Link href={"/dashboard"} className="text-lg">
+            <Link href={"/dashboard"} className="text-sm">
               Help Center
             </Link>
-            <Link href={"/auth/signin"} className="text-lg">
+            <Link href={"/auth/signin"} className="text-sm">
               Log in
             </Link>
           </>
         ) : (
           <>
-            <Link href={"/dashboard"} className="text-lg">
-              Browse events
+            <Link href={"/dashboard"} className="text-sm">
+              Picked for you
             </Link>
-            <Link href={"/dashboard"} className="text-lg">
-              Careers
-            </Link>
-            <p>{session.user.name}</p>
-            <Link href={"/profile"} className="text-lg">
+            <Link href={"/profile"} className="text-sm">
               Profile
             </Link>
-            <a href={"/api/auth/signout"}>Sign Out</a>
+            <a href={"/api/auth/signout"} className="text-sm">Sign out</a>
+            <p>{session.user.name}</p>
+
           </>
         )}
         <Button
