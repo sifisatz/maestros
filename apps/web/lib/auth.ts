@@ -117,7 +117,7 @@ export const refreshToken = async (
         "Failed to refresh token" + response.statusText
       );
     }
-
+   // createSession({ accessToken, refreshToken } )
     const { accessToken, refreshToken } =
       await response.json();
     // update session with new tokens

@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   );
 
   
-  // await updateTokens({ accessToken, refreshToken });
+  await updateTokens({ accessToken, refreshToken });
 
   return new Response("OK", { status: 200 });
 }

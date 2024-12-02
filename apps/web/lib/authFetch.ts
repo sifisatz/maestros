@@ -16,6 +16,7 @@ export const authFetch = async (
     ...options.headers,
     Authorization: `Bearer ${session?.accessToken}`,
   };
+  // /profile
   let response = await fetch(url, options);
 
 
